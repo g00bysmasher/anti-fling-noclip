@@ -1,0 +1,21 @@
+-- doesnt let anyone fling you
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+
+local function disableCollision(character)
+    for _, part in pairs(character:GetChildren()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+end
+
+local function onCharacterAdded(character)
+    disableCollision(character)
+end
+
+localPlayer.CharacterAdded:Connect(onCharacterAdded)
+
+if localPlayer.Character then
+    disableCollision(localPlayer.Character)
+end
